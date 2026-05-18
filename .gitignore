@@ -11,7 +11,7 @@ Release/
 *.user
 *.ipch
 *.dll
-
+output/
 __pycache__/
 *.py[cod]
 *$py.class
