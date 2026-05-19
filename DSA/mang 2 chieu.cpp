@@ -26,21 +26,95 @@ Output:PlaintextToa do cuoi: (1, 1) - Tong vat pham: 2
 Giải thích ví dụ:Vị trí ban đầu: (0, 0)R: Sang phải -> (0, 1). Nhặt được vật phẩm (Tổng = 1). Ô (0, 1) biến thành 0.R: Sang phải -> (0, 2). Đường trống.D: Xuống dưới -> (1, 2). Nhặt được vật phẩm (Tổng = 2). Ô (1, 2) biến thành 0.D: Xuống dưới -> (2, 2). Đường trống.L: Sang trái -> (2, 1). Đường trống.U: Lên trên -> (1, 1). Đường trống.(Vị trí kết thúc: 1, 1 và nhặt được 2 vật phẩm).*/
 #include <iostream>
 #include <vector>
+
 using namespace std;
 
 
 int main(){
     int m,n,x_ini,y_ini,x,y;
-    cin>>m,n;
+    int tongvp=0;
+    cout<<"Nhap m,n: ";
+    cin>>m>>n;
     int a[m][n];
     cin>>x_ini>>y_ini;
+    x=x_ini;
+    y=y_ini;
     for (auto &i:a){
-        for (int j:i){
+        for (int &j:i){
             cin>>j;
         }
     }
     char move[100];
     cin.ignore();
-    getline(cin,move[100]);
+    cin.getline(move,100);
+    for (int i:move){
+        switch (i)
+        {
+        case 'U':
+            if ( x-1<0 || x-1>m-1 || y<0 || y>n-1 || a[x-1][y]==1){
+                break;
+            }
+            else if (a[x-1][y]==2){
+                tongvp++;
+                x=x-1;
+                y=y;
+                a[x][y]=0;
+            }
+            else if (a[x-1][y]==0){
+                x=x-1;
+                y=y;
+            }
+            break;
+        case 'D':
+            if ( x+1<0 || x+1>m-1 || y<0 || y>n-1 || a[x+1][y]==1){
+                break;
+            }
+            else if (a[x+1][y]==2){
+                tongvp++;
+                x=x+1;
+                y=y;
+                a[x][y]=0;
+            }
+            else if (a[x+1][y]==0){
+                x=x+1;
+                y=y;
+            }
+            break;
+        case 'L':
+            if ( x<0 || x>m-1 || y-1<0 || y-1>n-1 || a[x][y-1]==1){
+                break;
+            }
+            else if (a[x][y-1]==2){
+                tongvp++;
+                x=x;
+                y=y-1;
+                a[x][y]=0;
+            }
+            else if (a[x][y-1]==0){
+                x=x;
+                y=y-1;
+            }
+            break;
+        case 'R':
+            if ( x<0 || x>m-1 || y+1<0 || y+1>n-1 || a[x][y+1]==1){
+                break;
+            }
+            else if (a[x][y+1]==2){
+                tongvp++;
+                x=x;
+                y=y+1;
+                a[x][y]=0;
+            }
+            else if (a[x][y+1]==0){
+                x=x;
+                y=y+1;
+            }
+        default:
+            continue;
+        }
+       
+    }
+    cout<<"Toa do cuoi: ("<<x<<","<<y<<") - Tong vat pham: "<<tongvp;
+
     return 0;
 }
