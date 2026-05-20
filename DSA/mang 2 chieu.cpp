@@ -112,7 +112,6 @@ int main(){
         default:
             continue;
         }
-       
     }
     cout<<"Toa do cuoi: ("<<x<<","<<y<<") - Tong vat pham: "<<tongvp;
 
