@@ -5,7 +5,7 @@ class Solution {
         while (a<matrix.size()){
             int l,r;
             l=0;
-            r=matrix[a].back();
+            r=matrix[a].size()-1;
             while (l <= r) {
                 int m=(l+r)/2;
                 if (matrix[a][m]==target){
